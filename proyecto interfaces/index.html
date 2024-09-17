@@ -213,6 +213,30 @@
                 <label for="timezone">Zona Horaria:</label>
                 <input type="text" id="timezone" name="timezone" placeholder="America/Caracas (-4:30)">
             </div>
+            
+            <div class="form-group">
+                <label for="imageUpload">Subir Foto de Perfil:</label>
+                <input type="file" id="imageUpload" accept="image/*">
+                <img id="profilePicture" alt="Previsualización de la imagen" style="display:none;">
+            </div>
+            
+            <script>
+                document.getElementById('imageUpload').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.getElementById('profilePicture');
+                            img.src = e.target.result;
+                            img.style.display = 'block';
+                            img.style.width = '150px'; // Tamaño thumbnail
+                            img.style.height = '150px'; // Tamaño thumbnail
+                            img.style.objectFit = 'cover'; // Mantener proporción
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
 
             <!-- Botón de envío -->
             <button type="submit" class="submit-btn">Enviar</button>
