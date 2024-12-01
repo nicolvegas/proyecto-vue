@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'edu';
+    src: url('fonts/edu.ttf') format('truetype');
+}
+
+#user-form-section {
+    font-family: 'edu', Arial, sans-serif; /* Aplica la fuente personalizada al formulario de usuario */
+}
+
+body {
+    padding: 20px;
+}
+
+button {
+    cursor: pointer;
+}

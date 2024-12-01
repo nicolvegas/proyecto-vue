@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Datos de Usuario</title>
+  <style>
+    html {
+      background-color: #181818;
+      color: #FFFFFF;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    input {
+      border-radius: 5px;
+    }
+
+    .form-container {
+      width: 50%;
+      margin: auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 12px #aaa;
+    }
+
+    #map {
+      height: 400px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #000;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+
+  <!-- Leaflet.js CSS and JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Leaflet Search Plugin -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h2>Formulario de Usuario</h2>
+
+    <form action="/submit" method="post">
+
+      <div class="form-group">
+        <label for="imageUpload">Subir Foto de Perfil:</label>
+        <input type="file" id="imageUpload" accept="image/*">
+        <img id="profilePicture" alt="Previsualización de la imagen" style="display:none;">
+      </div>
+      <div class="form-group">
+        <label for="gender">Género :</label><br>
+        <div style="display: flex;">
+          <label for="male">Masculino</label>
+          <input type="radio" id="male" name="gender" value="male" checked>
+        </div>
+        <div style="display: flex;">
+          <label for="female">Femenino</label>
+          <input type="radio" id="female" name="gender" value="female">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">Nombre:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="nombre">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Apellido:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="apellido">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com">
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Nombre de usuario">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" placeholder="****">
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Fecha de Nacimiento (DD-MM-YYYY):</label>
+        <input type="text" id="dob" name="dob" placeholder="DD-MM-YYYY">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Teléfono Fijo:</label>
+        <input type="tel" id="phone" name="phone" placeholder="011-088-4196">
+      </div>
+
+      <div class="form-group">
+        <label for="cell">Teléfono Celular:</label>
+        <input type="tel" id="cell" name="cell" placeholder="081-708-3092">
+      </div>
+
+      <div id="map"></div>
+
+      <div class="form-group">
+        <label for="street">Calle:</label>
+        <input type="text" id="street" name="street" placeholder="Avenida Intercomunal Don Julio Centeno">
+      </div>
+
+      <div class="form-group">
+        <label for="streetNumber">Número de Calle:</label>
+        <input type="text" id="streetNumber" name="streetNumber" placeholder="5390">
+      </div>
+
+      <div class="form-group">
+        <label for="city">Ciudad:</label>
+        <input type="text" id="city" name="city" placeholder="San Diego">
+      </div>
+
+      <div class="form-group">
+        <label for="state">Estado:</label>
+        <input type="text" id="state" name="state" placeholder="Estado Carabobo">
+      </div>
+
+      <div class="form-group">
+        <label for="country">País:</label>
+        <input type="text" id="country" name="country" placeholder="Venezuela">
+      </div>
+
+      <div class="form-group">
+        <label for="postcode">Código Postal:</label>
+        <input type="text" id="postcode" name="postcode" placeholder="2006">
+      </div>
+
+      <div class="form-group">
+        <label for="latitude">Latitud:</label>
+        <input type="text" id="latitude" name="latitude" placeholder="-0.4160">
+      </div>
+
+      <div class="form-group">
+        <label for="longitude">Longitud:</label>
+        <input type="text" id="longitude" name="longitude" placeholder="-83.8290">
+      </div>
+
+      <div class="form-group">
+        <label for="timezone">Zona Horaria:</label>
+        <input type="text" id="timezone" name="timezone" placeholder="America/Caracas (-4:30)">
+      </div>
+
+
+      <button type="submit" class="submit-btn">Enviar</button>
+    </form>
+
+    <h3>Seguimiento de acciones KLM-GOMS</h3>
+    <table id="klmTable" border="1">
+      <thead>
+        <tr>
+          <th>Operador</th>
+          <th>Dato</th>
+          <th>K</th>
+          <th>P</th>
+          <th>H</th>
+          <th>M</th>
+          <th>B</th>
+          <th>Tiempo Total (s)</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const K = 0.2;
+    const P = 1.1;
+    const H = 0.4;
+    const M = 1.2;
+    const B = 0.1;
+
+    function agregarAccion(operador, dato, k, p, h, m, b) {
+      const table = document.getElementById("klmTable").getElementsByTagName("tbody")[ 0 ];
+      const newRow = table.insertRow();
+      newRow.insertCell(0).innerText = operador;
+      newRow.insertCell(1).innerText = dato;
+      newRow.insertCell(2).innerText = k;
+      newRow.insertCell(3).innerText = p;
+      newRow.insertCell(4).innerText = h;
+      newRow.insertCell(5).innerText = m;
+      newRow.insertCell(6).innerText = b;
+      let tiempoTotal = (k + p + h + m + b).toFixed(2);
+      newRow.insertCell(7).innerText += tiempoTotal;
+    }
+    let k = 0, p = 0, h = 0, m = 0, b = 0;
+    function registrarAccion(operador, dato = '') {
+
+      switch (operador) {
+        case 'Escribir':
+          k += K;
+          break;
+        case 'Click':
+          b += B;
+          m += M;
+          break;
+        case 'Cambio de campo':
+          m += M;
+
+          break;
+        case 'RadioFemenino':
+          p += P;
+          m += M;
+          break;
+        case 'SubirImagen':
+          m += M;
+          p += 3 * P;
+          break;
+        case 'UsarMapa':
+          p += 2 * P;
+          m += M;
+          break;
+      }
+      agregarAccion(operador, dato, k, p, h, m, b);
+    }
+
+    // Agregar eventos a los campos
+
+    document.getElementById('firstName').addEventListener('input', function () {
+      registrarAccion('Escribir', this.value);
+
+    });
+    document.getElementById('lastName').addEventListener('input', function () {
+      registrarAccion('Escribir', this.value);
+
+    });
+    document.getElementById('email').addEventListener('input', function () {
+      registrarAccion('Escribir', this.value);
+
+    });
+    document.getElementById('username').addEventListener('input', function () {
+      registrarAccion('Escribir', this.value);
+
+    });
+    document.getElementById('password').addEventListener('input', function () {
+      registrarAccion('Escribir', this.value);
+
+    });
+    document.getElementById('firstName').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('lastName').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('email').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('username').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('password').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('dob').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('phone').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('cell').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+    document.getElementById('streetNumber').addEventListener('focus', function () {
+      registrarAccion('Cambio de campo');
+      m += M;
+    });
+
+
+    registrarAccion('Click', this.value);
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function () {
+        if (this.value === 'female') {
+          registrarAccion('RadioFemenino');
+        } else {
+          registrarAccion('Click', this.value);
+        }
+      });
+    });
+    document.getElementById('imageUpload').addEventListener('change', function () {
+      registrarAccion('SubirImagen');
+    });
+
+
+    // Inicializar el mapa
+    var map = L.map('map').setView([ 10.236799099999999, -67.96227281083797 ], 13);
+
+    // Añadir capa de mapa
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Añadir control de búsqueda
+    var geocoder = L.Control.geocoder({
+      defaultMarkGeocode: false
+    }).on('markgeocode', function (e) {
+      var latlng = e.geocode.center;
+      marker.setLatLng(latlng).update();
+      map.setView(latlng, 16);
+
+      // Rellenar campos de latitud y longitud
+      document.getElementById("latitude").value = latlng.lat;
+      document.getElementById("longitude").value = latlng.lng;
+
+      // Obtener datos de ubicación usando geocodificación inversa
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("street").value = data.address.road || '';
+          document.getElementById("city").value = data.address.city || data.address.town || '';
+          document.getElementById("state").value = data.address.state || '';
+          document.getElementById("country").value = data.address.country || '';
+          document.getElementById("postcode").value = data.address.postcode || '';
+          document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        });
+    }).addTo(map);
+
+    // Crear marcador de ubicación
+    var marker = L.marker([ 10.236799099999999, -67.96227281083797 ], {
+      draggable: true
+    }).addTo(map);
+
+    // Evento para cuando el marcador se arrastra
+    marker.on('dragend', function (e) {
+      var latlng = e.target.getLatLng();
+      document.getElementById("latitude").value = latlng.lat;
+      document.getElementById("longitude").value = latlng.lng;
+
+      // Actualizar campos de geocodificación inversa
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("street").value = data.address.road || '';
+          document.getElementById("city").value = data.address.city || data.address.town || '';
+          document.getElementById("state").value = data.address.state || '';
+          document.getElementById("country").value = data.address.country || '';
+          document.getElementById("postcode").value = data.address.postcode || '';
+          document.getElementById("timezone").value = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        });
+    });
+
+  </script>
+
+</body>
+
+</html>

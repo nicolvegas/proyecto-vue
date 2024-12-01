@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "../proyecto-interfaces/src/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "../proyecto-interfaces/src/components/icons"
+  ]
+}

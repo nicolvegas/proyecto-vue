@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Subida de Archivos con Vista Previa y Eliminación</title>
+    <style>
+        .file-input { margin-bottom: 15px; }
+        #previewContainer { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .preview { position: relative; display: flex; align-items: center; margin-bottom: 10px; max-width: 300px; }
+        .preview audio, .preview img, .preview video, .preview iframe { max-width: 100%; max-height: 300px; margin-right: 10px; }
+        .remove-btn { background: red; color: white; border: none; cursor: pointer; font-size: 16px; padding: 2px 6px; border-radius: 50%; margin-left: 10px; }
+        .audio-label { margin-right: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Subir Archivos</h2>
+    <form id="uploadForm">
+        <!-- Selección del tipo de archivo -->
+        <div class="file-input">
+            <label for="fileType">Selecciona el tipo de archivo:</label>
+            <select id="fileType" name="fileType" required>
+                <option value="">Seleccionar...</option>
+                <option value="audio">Audios (exactamente 3)</option>
+                <option value="image">Imágenes (sin límite)</option>
+                <option value="video">Video (máximo 1)</option>
+                <option value="pdf">PDF (máximo 1)</option>
+                <option value="vtt">Archivo VTT (máximo 1)</option>
+            </select>
+        </div>
+
+        <!-- Input para archivos -->
+        <div class="file-input">
+            <label for="fileInput">Subir archivo(s):</label>
+            <input type="file" id="fileInput" name="fileInput" multiple required>
+        </div>
+
+        <!-- Contenedor de vistas previas -->
+        <div id="previewContainer"></div>
+
+        <button type="submit">Subir Archivos</button>
+    </form>
+
+    <script>
+        const fileTypeSelect = document.getElementById('fileType');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        
+        // Objeto para almacenar los archivos seleccionados por tipo
+        const selectedFiles = {
+            audio: [],
+            image: [],
+            video: [],
+            pdf: [],
+            vtt: []
+        };
+
+        // Cambia las restricciones de acuerdo con el tipo seleccionado
+        fileTypeSelect.addEventListener('change', function() {
+            fileInput.value = "";  // Reinicia el valor del input file
+            fileInput.removeAttribute("multiple");  // Remueve multiple por defecto
+
+            switch (fileTypeSelect.value) {
+                case 'audio':
+                    fileInput.setAttribute("accept", "audio/*");
+                    fileInput.setAttribute("multiple", true);
+                    break;
+                case 'image':
+                    fileInput.setAttribute("accept", "image/*");
+                    fileInput.setAttribute("multiple", true);
+                    break;
+                case 'video':
+                    fileInput.setAttribute("accept", "video/*");
+                    break;
+                case 'pdf':
+                    fileInput.setAttribute("accept", "application/pdf");
+                    break;
+                case 'vtt':
+                    fileInput.setAttribute("accept", ".vtt");
+                    break;
+            }
+
+            // Muestra la vista previa de archivos previamente seleccionados
+            displayPreviews();
+        });
+
+// Muestra la vista previa de archivos seleccionados
+function displayPreviews() {
+    previewContainer.innerHTML = "";  // Limpia vistas previas anteriores
+    const files = selectedFiles[fileTypeSelect.value];
+
+    files.forEach((file, index) => {
+        const fileURL = URL.createObjectURL(file);
+        const previewElement = document.createElement("div");
+        previewElement.classList.add("preview");
+
+        // Crea el elemento de contenido y la etiqueta de eliminación
+        let contentElement;
+        if (file.type.startsWith("image/")) {
+            contentElement = document.createElement("img");
+            contentElement.src = fileURL;
+        } else if (file.type.startsWith("audio/")) {
+            contentElement = document.createElement("audio");
+            contentElement.controls = true;
+            contentElement.src = fileURL;
+
+            // Etiqueta específica para audio (Figura 1, Figura 2, Figura 3)
+            const label = document.createElement("span");
+            label.classList.add("audio-label");
+            label.textContent = `Figura ${index + 1}`;
+            previewElement.appendChild(label);
+        } else if (file.type.startsWith("video/")) {
+            contentElement = document.createElement("video");
+            contentElement.controls = true;
+            contentElement.src = fileURL;
+        } else if (file.type === "application/pdf") {
+            contentElement = document.createElement("iframe");
+            contentElement.src = fileURL;
+        } else if (file.name.endsWith(".vtt")) {
+            contentElement = document.createElement("p");
+            contentElement.textContent = "Archivo VTT: " + file.name;
+        } else {
+            contentElement = document.createElement("p");
+            contentElement.textContent = "Archivo no soportado: " + file.name;
+        }
+
+        // Muestra el tamaño del archivo en MB
+        const sizeElement = document.createElement("span");
+        sizeElement.textContent = ` (${(file.size / (1024 * 1024)).toFixed(2)} MB)`; // Tamaño en MB
+        previewElement.appendChild(contentElement);
+        previewElement.appendChild(sizeElement);
+
+        // Botón de eliminación
+        const removeButton = document.createElement("button");
+        removeButton.classList.add("remove-btn");
+        removeButton.textContent = "X";
+        removeButton.onclick = () => removeFile(index);
+
+        // Ensambla los elementos de vista previa
+        previewElement.appendChild(removeButton);
+        previewContainer.appendChild(previewElement);
+    });
+}
+
+        // Agrega los archivos seleccionados al objeto selectedFiles
+        fileInput.addEventListener('change', function() {
+            const selectedType = fileTypeSelect.value;
+            if (!selectedType) {
+                alert("Por favor, selecciona el tipo de archivo.");
+                fileInput.value = "";  // Reinicia el input file
+                return;
+            }
+
+            // Agrega archivos al tipo seleccionado y verifica límites
+            Array.from(fileInput.files).forEach(file => {
+                if (selectedType === "audio" && selectedFiles[selectedType].length >= 3) {
+                    alert("Solo puedes subir 3 archivos de audio.");
+                    return;
+                }
+                if ((selectedType === "video" || selectedType === "pdf" || selectedType === "vtt") && selectedFiles[selectedType].length >= 1) {
+                    alert(`Solo puedes subir 1 archivo de tipo ${selectedType}.`);
+                    return;
+                }
+                selectedFiles[selectedType].push(file);
+            });
+
+            displayPreviews(); // Actualiza la vista previa
+        });
+
+        // Elimina un archivo de la lista
+        function removeFile(index) {
+            const selectedType = fileTypeSelect.value;
+            selectedFiles[selectedType].splice(index, 1); // Remueve el archivo de la lista
+            displayPreviews(); // Actualiza la vista previa
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Validación para audios
+            if (fileTypeSelect.value === "audio" && selectedFiles.audio.length !== 3) {
+                alert("Debes subir exactamente 3 archivos de audio.");
+                return;
+            }
+
+            alert("Archivos listos para subir.");
+            // Aquí puedes manejar el envío del formulario con selectedFiles.
+        });
+    </script>
+</body>
+</html>

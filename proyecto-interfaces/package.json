@@ -1,0 +1,31 @@
+{
+  "name": "proyecto-interfaces",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@npmcli/fs": "^4.0.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "@tabler/icons-vue": "^3.16.0",
+    "bulma": "^1.0.2",
+    "quill": "^2.0.2",
+    "vue": "^3.4.29",
+    "vue-color": "^2.8.1",
+    "vue-router": "^4.3.3",
+    "vue3-colorpicker": "^2.3.0",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "sass": "^1.78.0",
+    "sass-embedded": "^1.78.0",
+    "sass-loader": "^16.0.1",
+    "vite": "^5.3.1"
+  }
+}

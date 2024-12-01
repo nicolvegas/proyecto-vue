@@ -1,0 +1,215 @@
+@import '/node_modules/bulma/bulma';
+
+$mainColor: #181818;
+$backgroundColor: #f7f7f7;
+$textColor: #181818;
+
+//Text
+$primary: #F7F7F7;
+$secondary: #181818;
+$warning: #bd4317;
+$success: #10d26e;
+$danger: #c61f1f;
+
+
+//Background
+$background: #181818;
+$background_secondary: #212121;
+$background_light: #dfdfdf;
+
+//Links
+$link: #10d26e;
+$link_hover: #0e9e5f;
+
+//Items
+$item: #f7f7f7;
+$item_hover: #e6e6e6;
+
+//Buttons
+$button_primary: #181818;
+$button_secondary: #f7f7f7;
+$button_danger: #c61f1f;
+$button_warning: #d73f21;
+$button_success: #10d26e;
+$button_hover_primary: #2e2d2d;
+$button_hover_secondary: #e6e6e6;
+$button_hover_danger: #a41f1f;
+$button_hover_warning: #a3311a;
+$button_hover_success: #0e9e5f;
+
+
+//Cards
+$card: #f7f7f7;
+$card_secondary: #1B1B1B;
+$card_hover: #e6e6e6;
+$card_hover_secondary: #181818;
+
+//Forms
+$input: #f7f7f7;
+$input_hover: #e6e6e6;
+$input_text: #1B1B1B;
+$input_text_hover: #181818;
+
+// Custom Styles
+a {
+  color: $link;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+body, html {
+  background-color: $background;
+  color: $mainColor;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $background;
+  width: 100%;
+  height: 100px;
+}
+
+h1{
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Inria Sans";
+}
+
+button{
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input {
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 100%;
+}
+
+
+
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: $background;
+  padding: 1rem;
+  width: 100%;
+}
+
+.navbar-menu{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background-color: $background;
+  box-shadow: none;
+}
+
+.navbar-item {
+  padding: 12px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: auto;
+  text-align: center;
+  margin: 10px;
+  transition: all 0.3s;
+  margin-right: 1rem;
+  text-decoration: none ;
+}
+
+.footer {
+  background-color: $background_secondary;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  bottom: 0;
+  width: 100%;
+  height: 30vh;
+  padding: 20px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: $button_hover_primary;
+  color: $link;
+}
+
+.links{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: $link-hover;
+  margin: 10px;
+  gap: 10px;
+}
+
+.button-primary{
+  padding: 10px;
+  background-color: $button_primary;
+  color: $primary;
+}
+
+.button-primary:hover{
+  background-color: $button_hover_primary;
+}
+
+.button-secondary{
+  padding: 10px;
+  background-color: $link ;
+  color: $secondary;
+}
+
+.button-secondary:hover{
+  background-color: $link-hover;
+}
+
+.button-warning{
+  padding: 10px;
+  background-color: $button_warning;
+  color: $primary;
+}
+
+.button-warning:hover{
+  background-color: $button_hover_warning;
+}
+
+.card{
+  background-color: $card;
+  color: $secondary;
+}
+
+.card-title{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.card-content{
+  font-size: 1.5rem;
+  font-weight: 300;
+  padding: 10px;
+}
+
+.catchphrase{
+  font-weight: 700;
+  color: $link;
+}
