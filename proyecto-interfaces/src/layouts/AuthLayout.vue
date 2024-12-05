@@ -23,4 +23,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.footer {
+	margin-top: 20px;
+	background-color: #212121;
+	height: 35vh;
+	bottom: 0;
+}
+</style>

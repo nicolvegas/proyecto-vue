@@ -1,13 +1,13 @@
 <script setup>
+import Wysiwyg from "@/components/Wysiwyg.vue";
 import AuthLayout from "../layouts/AuthLayout.vue";
 </script>
 
 <template>
 	<AuthLayout>
 		<div>
-			<h1>Usuarios</h1>
-			<a href="/">Click Me!</a>
-			<p>Tabla de usuarios</p>
+			<h1>Términos y condiciones</h1>
+			<Wysiwyg />
 		</div>
 	</AuthLayout>
 </template>

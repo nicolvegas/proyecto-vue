@@ -5,20 +5,8 @@ import Card from "@/components/Card.vue";
 import Main from "@/layouts/Main.vue";
 
 import Check from '@/assets/icons/Check.vue';
-import { onMounted, ref } from "vue";
 import Credit from '../assets/icons/Credit.vue';
-import supabase from "../supabase";
 
-const cars = ref([]);
-
-async function getCars() {
-	const { data } = await supabase.from("products").select();
-	cars.value = data;
-}
-
-onMounted(() => {
-	getCars();
-});
 </script>
 
 <template>
@@ -41,19 +29,7 @@ onMounted(() => {
 
 		<div>
 			<h1>Vehículos populares</h1>
-			<ul>
-				<li v-for="car in cars" :key="car.id">
-					<Card :title="car.name">
-						<div><img :src="`/Carros${car.image}`" alt="car" /></div>
-						<label>{{ car.year }}</label>
-						<div class="description">
-							<p class="price">{{ car.price }}</p>
-							-
-							<p>{{ car.transmission }}</p>
-						</div>
-					</Card>
-				</li>
-			</ul>
+			
 		</div>
 
 		<div>

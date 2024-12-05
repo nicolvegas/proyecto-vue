@@ -1,28 +1,23 @@
 body {
     margin: 0;
     padding: 0;
-    background: cadetblue;
-    height: 100vh;
+    background: #212121;
     overflow: hidden;
 }
 
-.escena {
-    perspective: 1000px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  
+
+
 .contenedor {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
     height: 100vh;
+    scale: 0.75;
     transform-style: preserve-3d;
     animation: flotar 6s ease-in-out infinite;
 }
-  
+
 .pieza {
     transition: all 2s ease-in-out;
     transform-style: preserve-3d;
@@ -31,78 +26,91 @@ body {
 }
 
 /* Piezas del Tangram con colores y posiciones únicas */
-.grande1 { /* Triángulo grande 1 */
+.grande1 {
+    /* Triángulo grande 1 */
     width: 0;
     height: 0;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
-    border-bottom: 150px solid #4CAF50; /* Verde */
+    border-bottom: 150px solid #4CAF50;
+    /* Verde */
     transform: translate(0, 0);
     filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
 }
-  
-.grande2 { /* Triángulo grande 2 */
+
+.grande2 {
+    /* Triángulo grande 2 */
     width: 0;
     height: 0;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
-    border-bottom: 150px solid #FF5722; /* Naranja */
+    border-bottom: 150px solid #FF5722;
+    /* Naranja */
     /* transform: translate(150px, 0) rotate(90deg); */
     filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
     position: absolute;
 }
-  
-.mediano { /* Triángulo mediano */
+
+.mediano {
+    /* Triángulo mediano */
     width: 0;
     height: 0;
     border-left: 105px solid transparent;
     border-right: 105px solid transparent;
-    border-bottom: 105px solid #2196F3; /* Azul */
+    border-bottom: 105px solid #2196F3;
+    /* Azul */
     /* transform: translate(100px, 150px); */
     filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
     position: absolute;
 }
-  
-.cuadrado { /* Cuadrado */
+
+.cuadrado {
+    /* Cuadrado */
     transform: translateZ(50px);
     width: 110px;
     height: 110px;
-    background-color: #9C27B0; /* Morado */
+    background-color: #9C27B0;
+    /* Morado */
     position: absolute;
     transform-style: preserve-3d;
 }
-  
-.triangulo{
-      border-left: 75px solid transparent;
-      border-right: 75px solid transparent;
-      border-bottom: 75px solid #3F51B5; /* Azul oscuro */
-      position: absolute;
-    }
-    
-.cara1{ /* Triángulo pequeño 1 */
+
+.triangulo {
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 75px solid #3F51B5;
+    /* Azul oscuro */
+    position: absolute;
+}
+
+.cara1 {
+    /* Triángulo pequeño 1 */
     transform: translateZ(50px);
     border-left: 75px solid transparent;
     border-right: 75px solid transparent;
-    border-bottom: 75px solid #3F51B5; /* Azul oscuro */
+    border-bottom: 75px solid #3F51B5;
+    /* Azul oscuro */
     transform-style: preserve-3d;
     animation: girar 5s ease-in-out alternate infinite;
     position: absolute;
 }
 
-.pequeñoI { /* Triángulo pequeño 2 */
+.pequeñoI {
+    /* Triángulo pequeño 2 */
     width: 0;
     height: 0;
     border-left: 75px solid transparent;
     border-right: 75px solid transparent;
-    border-bottom: 75px solid #E91E63; /* Rosa */
+    border-bottom: 75px solid #E91E63;
+    /* Rosa */
     transform: translate(75px, 300px) rotate(-90deg);
 }
-  
+
 .paralelogramo {
     position: absolute;
-    width: 150px; 
-    height: 150px; 
-    /* transform: translate(125px, 225px); /* Positioning the parallelogram */ 
+    width: 150px;
+    height: 150px;
+    /* transform: translate(125px, 225px); /* Positioning the parallelogram */
     transform: rotateZ(90deg);
 }
 
@@ -111,7 +119,8 @@ body {
     height: 0;
     border-left: 75px solid transparent;
     border-right: 75px solid transparent;
-    border-bottom: 75px solid #3F51B5; /* Azul oscuro */
+    border-bottom: 75px solid #3F51B5;
+    /* Azul oscuro */
     transform: rotate(0deg);
     position: absolute;
     left: 0;
@@ -122,22 +131,29 @@ body {
     height: 0;
     border-left: 75px solid transparent;
     border-right: 75px solid transparent;
-    border-bottom: 75px solid #3F51B5; /* Azul oscuro */
+    border-bottom: 75px solid #3F51B5;
+    /* Azul oscuro */
     transform: rotate(180deg);
     position: absolute;
     left: 75px;
 }
+
 /* Añade estas animaciones al final del archivo */
 @keyframes flotar {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateZ(0) rotateX(0) rotateY(0);
     }
+
     25% {
         transform: translateZ(100px) rotateX(5deg) rotateY(5deg);
     }
+
     50% {
         transform: translateZ(50px) rotateX(-5deg) rotateY(-5deg);
     }
+
     75% {
         transform: translateZ(100px) rotateX(5deg) rotateY(-5deg);
     }

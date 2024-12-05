@@ -13,7 +13,7 @@ import Card from "../components/Card.vue";
 					<label for="password">Contraseña</label>
 					<input type="password" id="password" name="password" />
 				</form>
-				<button type="submit" class="button-primary"><a href="/dashboard">Iniciar sesión</a></button>
+				<a href="/dashboard"><button type="submit" class="button-primary">Iniciar sesión</button></a>
 			</Card>
 		</div>
 	</GoBack>

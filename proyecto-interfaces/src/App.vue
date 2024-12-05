@@ -1,11 +1,9 @@
 <script setup>
-import { RouterView } from 'vue-router';
-import CustomizeForm from './components/CustomizeForm.vue';
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div>
-    <CustomizeForm />
-    <RouterView />
-  </div>
+	<div>
+		<RouterView />
+	</div>
 </template>

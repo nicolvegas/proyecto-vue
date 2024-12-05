@@ -1,14 +1,11 @@
 <script setup>
 import ProfileForm from "../components/ProfileForm.vue";
-import AuthLayout from "../layouts/AuthLayout.vue";
 </script>
 
 <template>
-	<AuthLayout>
+	<div>
 		<div>
-			<div>
-				<ProfileForm />
-			</div>
+			<ProfileForm />
 		</div>
-	</AuthLayout>
+	</div>
 </template>
